@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arts Festival Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/qr-scanner@1.4.2/qr-scanner.umd.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div id="app" class="container mx-auto p-4">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="max-w-md mx-auto mt-20">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Arts Festival Manager</h1>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Select Role:</label>
+                    <select id="roleSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="team_leader">Team Leader</option>
+                        <option value="invigilator">Invigilator</option>
+                        <option value="judge">Judge</option>
+                        <option value="announcer">Announcer</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Username/Team Name:</label>
+                    <input type="text" id="username" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Enter username">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password:</label>
+                    <input type="password" id="password" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Enter password">
+                </div>
+
+                <button id="loginBtn" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200">
+                    Login
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Dashboard (Hidden initially) -->
+        <div id="dashboard" class="hidden">
+            <nav class="bg-white shadow-sm rounded-lg mb-6 p-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl font-bold text-gray-800" id="dashboardTitle">Dashboard</h1>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600" id="userInfo"></span>
+                        <button id="logoutBtn" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Dynamic content area -->
+            <div id="content" class="space-y-6">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="admin.js"></script>
+    <script src="admin-setup.js"></script>
+    <script src="leader.js"></script>
+    <script src="invigilator.js"></script>
+    <script src="judge.js"></script>
+    <script src="announcer.js"></script>
+    
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => console.log('SW registered'))
+                .catch(error => console.log('SW registration failed'));
+        }
+    </script>
+</body>
+</html>
