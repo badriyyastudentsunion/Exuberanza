@@ -900,11 +900,11 @@ async function updateCompetitionRegistration(competitionId) {
                     const field = comp.is_stage_item ? 'stage_registrations' : 'non_stage_registrations';
                     
                     // Use RPC function instead of supabase.raw
-                   await supabase.rpc('update_registration_count', {
-    participant_id: participantId,
-    is_stage: competition.is_stage_item,
-    increment_value: 1  // Use 1 for increment, -1 for decrement
-});
+                    await supabase.rpc('update_participant_count', {
+                        participant_id: participantId,  
+                        field_name: field,
+                        increment: 1
+                    });
                 }
             }
         }
